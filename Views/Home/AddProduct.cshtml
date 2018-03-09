@@ -1,0 +1,430 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {             
+            $("#sidebar").hide();     
+            
+            $('#addyour_product').css('display', 'block');
+            $('.tab-pane ').removeClass('active');
+            $('.nav-tabs li').removeClass('active');
+
+            //hide left sidebar and serch menu
+            $('.nav-tabs li').css('display', 'none');
+            $("#addyour_product").show();
+            $("#addyour_product").addClass('active');
+            $('.nav-tabs').css('margin-left', '-25px');
+            $('#strip').addClass('col-md-1');
+            $('#sidebar').removeClass('col-md-9');
+            $('.body-content').removeClass('col-md-9');
+            $('.body-content').addClass('col-md-11');
+            //$('.body-content').css('margin-left', '32px');
+            $('.body-content').addClass('setMargin');
+
+            //show block on click of top bar menu option
+            console.log('this', this);
+            if ($(this).hasClass('search_active')) {
+                alert("seach");
+                //show left sidebar
+                $('#sidebar').addClass('col-md-2');
+                $('#sidebar').css('display', 'block');
+                //show search tab
+                $('.nav-tabs li').css('display', 'block');
+
+                //show body container
+                $('.body-content').removeClass('col-md-11');
+                $('.body-content').addClass('col-md-9');
+                $('.body-content').removeClass('setMargin');
+                $('.category').addClass('active');
+                $('#Section1').addClass('active');
+                //hide active tab
+                $('#dash_details').css('display', 'none');
+                $('#dash_details').removeClass('active');
+                $('#addyour_product').css('display', 'none');
+                $('#addyour_product').removeClass('active');
+                $('#analytics_detail').css('display', 'none');
+                $('#analytics_detail').removeClass('active');
+
+            }
+            if ($(this).hasClass('add_active')) {
+                alert("addactive");
+                $('.has_detail').addClass("lalit1");
+                $('.tab-pane').hide();
+                $('.Edit_Product').hide();
+                $('#addyour_product').css('display', 'block');
+
+                //$('#Section6').css('display', 'none');
+                $('#addyour_product').addClass('active');
+                $('#Section7').addClass('active');
+                alert("addactive2");
+            }
+            if ($(this).hasClass('import_active')) {
+                $('.tab-pane').hide();
+                $('#dash_details').css('display', 'block');
+                $('#dash_details').addClass('active');
+                $('#Section5').addClass('active');
+            }
+            if ($(this).hasClass('analytics_active')) {
+                $('.tab-pane').hide();
+                $('#analytics_detail').css('display', 'block');
+                $('#analytics_detail').addClass('active');
+                $('#Section6').css('display', 'none');
+                //$('#analytics').addClass('active');
+                $('#Section8').addClass('active');
+            }
+            if ($(this).hasClass('dash_active')) {
+                $('.tab-pane').hide();
+                $('#dash_details').css('display', 'block');
+                $('#dash_details').addClass('active');
+                $('#Section5').addClass('active');
+            }
+        });
+
+    </script>
+
+}
+
+
+
+<div role="tabpanel" class="tab-pane fade in active row" id="Section7" style="padding-top: 60px;">
+    <div class="sec1 col-md-6 col-xs-6">        
+        @using (Html.BeginForm("AddProduct", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        {  
+        <div class="form-group">
+            <label class="col-md-4 control-label">Company:</label>
+            <div class="col-md-8">
+                <input class="form-control company" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Product Name:</label>
+            <div class="col-md-8">
+                <input class="form-control productName" type="text" name="product_name">
+            </div>
+        </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Upload logo:</label>
+                                    <div class="col-md-8">
+                                        <input type="file" class="uploadLogo" onchange="ImgPreview(this)">
+                                    </div>
+                                </div>
+                                    <div class="form-group" id="primary_Category">
+                                        
+                                        <label class="col-md-4 control-label">Primary Category:</label>
+                                        <div class="col-md-8">
+
+                                            <select class="form-control editable_drop" name="Category">
+                                                <option>Category1</option>
+                                                <option>Category2</option>
+                                                <option>Category3</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Keywords:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control keywords" type="text" name="Keywords">                                        
+                                        </div>                                               
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Product Description:</label>
+                                        <div class="col-md-8">                                            
+                                            <textarea class="pr_descr" name="pr_descr"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Modules:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control modules" type="text" name="module">                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Features:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control features" type="text" name="features">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Meta Tags:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control meta_tags" type="text" name="meta_tag">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Geographical Focus:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control  geo_focus" type="text" name="geographical_focus">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Target Job Titles:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control target_job" type="text" name="target_job_titles">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Target Industry type:</label>
+                                        <div class="col-md-8">
+
+                                            <select class="form-control editable_drop" name="target_company_type">
+                                                <option>Retail</option>
+                                                <option>Enterprise Retail</option>
+                                                <option>Construction</option>
+                                                <option>Telecom</option>
+                                                <option>Government</option>
+                                                <option>Healthcare</option>
+                                                <option>Finance</option>
+                                                <option>Advertising</option>
+                                                <option>Oil and natural gas</option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Target Department/User Type:</label>
+                                        <div class="col-md-8 c_dropdown">
+
+                                            <select class="form-control editable_drop" name="dep_user_type">
+                                                <option>Sales</option>
+                                                <option>Marketing</option>
+                                                <option>Project management</option>
+                                                <option>Email marketing</option>
+                                                <option>Accounting</option>
+                                                <option>Forecasting</option>
+                                                <option>Budgeting</option>
+                                                <option>Asset Management</option>
+                                                <option> IT Administration</option>
+                                                <option> IT Help Desk</option>
+                                                <option>IT Security</option>
+                                                <option>PLM</option>
+                                                <option>Document management</option>
+                                                <option>Field Service management</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Target Company Revenue:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control revenue currency" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Target Company employees:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control emp number_field" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Semantic:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control semantic" type="text" name="semantic">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Cognitive:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control cognitive" type="text" name="cognitive">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Pricing:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control currency cr_value" type="text" name="pricing">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Status:</label>
+                                        <div class="col-md-8">
+
+                                            <select class="form-control editable_drop status">
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="col-md-6">
+                                            <button class="Add_submit submitProduct" type="submit" style="width: 50%;float: right;">Add </button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="cancel_submit" type="reset" style="width: 50%;">Cancel</button>                       
+                                        </div>
+                                    </div>
+
+        }
+        
+
+    </div>
+    <div class="sec2 col-md-6 col-xs-6">
+        <div id="preview">
+            <div class="row head_section">
+                <div class="col-xs-2 product_img">
+                    <a class="thumbnail listing-thumbnail">
+                        <img class="upload_preview" alt="logo" src="" />
+                    </a>
+
+                </div>
+                <div class="col-xs-10 left_cell">
+
+                    <div class="cell">
+                        <input placeholder="Product Name" class="listing-name header_preview" type="text" disabled>     
+                    </div>
+                    <div class="cell">
+                        <input placeholder="Company Name" class="listing-vendor color-gray by_preview" type="text" disabled>
+                    </div>
+
+                </div>
+            </div>
+            <hr />
+            <div class="row middle_section">
+                <div class="col-md-6 pr_details">
+                    <h2>
+                        Product Details
+                    </h2>
+                    <ul class="check-list">
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Category</strong>
+                                </div>
+                                <input class="cell preview cat_preview " type="text" disabled>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Keywords</strong>
+                                </div>
+                                <input class="cell preview key_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Modules</strong>
+                                </div>
+                                <input class="cell preview mod_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Meta tags</strong>
+                                </div>
+                                <input class="cell preview meta_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Geographical Focus</strong>
+                                </div>
+                                <input class="cell preview geo_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Target Job Titles</strong>
+                                </div>
+                                <input class="cell preview job_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Target Industry type</strong>
+                                </div>
+                                <input class="cell preview ind_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Target Department/User Type</strong>
+                                </div>
+                                <input class="cell preview user_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Target Company Revenue</strong>
+                                </div>
+                                <input class="cell preview rev_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Target Company employees</strong>
+                                </div>
+                                <input class="cell preview emp_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Semantic</strong>
+                                </div>
+                                <input class="cell preview sem_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Cognitive</strong>
+                                </div>
+                                <input class="cell preview cogn_preview" type="text" disabled>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong>Price</strong>
+                                </div>
+                                <input placeholder="$" class="cell preview value_preview" type="text" disabled>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid  grid-thick">
+                                <div class="cell title_preview">
+                                    <strong> Status</strong>
+                                </div>
+                                <input class="cell preview st_preview" type="text" style="margin-bottom: 15px;" disabled>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-md-6 pr_desc">
+                    <h2><span class="glyphicon glyphicon-info-sign"></span>About Product</h2>
+                    <p id="about_preview" disabled></p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

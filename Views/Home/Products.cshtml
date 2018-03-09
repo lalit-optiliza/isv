@@ -1,0 +1,198 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div role="tabpanel" class="tab-pane fade active in" id="Section2">
+    <div class="panel-group" id="desc">
+        <div class="panel custom_panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Testing Software
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse ">
+                <div class="panel-body cust_panel_body">
+                    <ul class="custom_panel" id="ul_product">
+                        @{ int counter = 1;
+                            foreach (var product in ViewBag.category)
+                            {
+                        <li class="panel-body custom_panel_body">
+
+                            <div id="product@(counter++)" class="col-md-12 product_row" onclick="newColumn(this);">
+                                <div class="col-md-2 product_img">
+                                    <a href="" target="_blank" class="thumbnail  listing-thumbnail" data-external-click="logo">
+                                        <img src="~/images/UseItBetter.png" />
+                                    </a>
+
+                                </div>
+
+                                <div class="col-md-10 cell info">
+
+                                    <div class="cell">
+                                        <h2 class="listing-name">
+
+
+                                            @Html.Raw(product.category)<br />
+                                            @Html.Raw(product.product_name)
+                                        </h2>
+                                        <h3 class="zeta  listing-vendor  color-gray">by UseItBetter</h3>
+                                        <div class="review-information">
+                                            <div class="reviews" data-rating="4.0/5 - 3">
+                                                <a href="" class="reviews-stars">
+                                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                </a>
+                                                <a href="" class="reviews-count milli">(5 reviews)</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cell">
+                                        <p class="listing-description  milli">
+                                            UseItBetter understands how your website is built and automatically tracks everything visitors do. You can use CSS selectors, just like you would do in jQuery, to measure visitors actions or use them as Triggers to A/B test changes to your website.
+                                            @Html.Raw(product.description)
+                                            <a class="spotlight-link">Learn more about UseItBetter</a>
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                            }
+                            }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="addColumn">
+@{ int counter1 = 1;
+    foreach (var product in ViewBag.category)
+    {
+    <div id="product_details@(counter1++)" style="display:none;">
+        <div class="row head_section">
+            <div class="col-xs-2 product_img">
+                <a href="" target="_blank" class="thumbnail  listing-thumbnail" data-external-click="logo">
+                    <img alt="UseItBetter" src="~/images/UseItBetter.png" />
+                </a>
+
+            </div>
+            <div class="col-xs-10 left_cell">
+
+                <div class="cell">
+                    <h2 class="listing-name">
+                        @Html.Raw(product.category)<br />
+                        @Html.Raw(product.product_name)
+                        @*<a href="">UseItBetter</a>*@
+                    </h2>
+                    <h3 class="zeta  listing-vendor  color-gray">by UseItBetter</h3>
+                    <div class="review-information">
+                        <div class="reviews" data-rating="4.0/5 - 3">
+                            <a href="" class="reviews-stars">
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                            </a>
+                            <a href="" class="reviews-count milli">(5 reviews)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <hr />
+        <div class="row middle_section">
+            <div class="col-md-6 pr_details">
+                <h2>Product Details</h2>
+                <ul class="check-list">
+                    <li>
+                        <div class="grid  grid-thick">
+                            <div class="cell  five-twelfths">
+                                <strong>Starting Price</strong>
+                            </div>
+                            <div class="cell  seven-twelfths">
+                                $9.00/month
+                                <br>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="grid  grid-thick">
+                            <div class="cell  five-twelfths">
+                                <strong>Free Version</strong>
+                            </div>
+                            <div class="cell  seven-twelfths">
+                                <i class="ss-check  icon-lead  micro  color-green"></i>Yes
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid  grid-thick">
+                            <div class="cell  five-twelfths">
+                                <strong>Free Trial</strong>
+                            </div>
+                            <div class="cell  seven-twelfths">
+                                <i class="ss-check  icon-lead  micro  color-green"></i>Yes
+                                ,<a> get a free trial</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="grid  grid-thick">
+                            <div class="cell  five-twelfths">
+                                <strong>Support</strong>
+                            </div>
+                            <div class="cell  seven-twelfths">
+                                <i class="ss-check  icon-lead  micro  color-green"></i>Online<br>
+                                <i class="ss-check  icon-lead  micro  color-green"></i>24/7 (Live Rep)<br>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <h2>Vendor Details</h2>
+                <ul class="check-list">
+                    <li>UseItBetter</li>
+                    <li>www.useitbetter.com/</li>
+                    <li>Founded 2009</li>
+                    <li>Poland</li>
+                </ul>
+
+            </div>
+            <div class="col-md-6 pr_desc">
+                <h2><span class="glyphicon glyphicon-info-sign"></span>About UseItBetter</h2>
+                <p>
+                    @Html.Raw(product.description)
+                </p>
+            </div>
+        </div>
+        <hr style="margin-bottom: 0px;" />
+        <div class="row bottom_section">
+            <h2><span class="glyphicon glyphicon-comment"></span>UseItBetter Reviews</h2>
+            <button type="button" class="review_product">Review This Product !</button>
+        </div>
+    </div>
+        }
+    }   
+</div>

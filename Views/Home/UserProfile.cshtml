@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="idUserProfile" class="modal">
+    @*<div id="idUserProfile">*@
+    <div class="modal-content animate prof_window" style="height: 420px;width: 55%;">
+        <div class="container login">
+            @*<div class="container" >*@
+            <h2 class="head_name">Edit Profile</h2>
+            <span onclick="document.getElementById('idUserProfile').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <hr>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <img src="//placehold.it/100" class="profile_img avatar img-circle" alt="Profile ">
+                        @*<img src="#" class="profile_img" alt="Profile" style="height:100px;width:100px;">*@
+                        <h6 class="diff">Upload a different photo...</h6>
+                        <input type="file" class="form-control choose_prof" style="border:none;" onchange="profPreview(this)">
+                    </div>
+                </div>
+
+                <!-- edit form column -->
+                <div class="col-md-8 personal-info" style="overflow-y:scroll;overflow-y: scroll;height: 328px;margin-left: -16px;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group prof_form">
+                            <label class="col-md-3 control-label">Username:</label>
+                            <div class="col-md-8">
+                                <input class="form-control profile_input" type="text" value="janeuser">
+                            </div>
+                        </div>
+                        <div class="form-group prof_form">
+                            <label class="col-lg-3 control-label">Company:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control profile_input" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group prof_form">
+                            <label class="col-lg-3 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control profile_input" type="text" value="janesemail@gmail.com">
+                            </div>
+                        </div>
+                        <div class="form-group prof_form">
+                            <label class="col-md-3 control-label">Password:</label>
+                            <div class="col-md-8">
+                                <input class="form-control profile_input" type="password" value="11111122333">
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-md-3 control-label">Confirm password:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="password" value="11111122333">
+                                </div>
+                            </div>*@
+                        <div class="form-group prof_form">
+                            <label><input class="custom_checkbox" type="checkbox" name="Checkbox" value="change_password">Change Password</label>
+                        </div>
+                        <div class="change_password">
+                            <div class="form-group mob_form">
+                                <label for="current_password" class="col-md-3 control-label">Current Password:</label>
+                                <div class="controls col-md-8">
+                                    <input class="form-control profile_input" type="password" name="current_password">
+                                </div>
+                            </div>
+                            <div class="form-group prof_form">
+                                <label for="new_password" class="col-md-3 control-label">New Password:</label>
+                                <div class="controls col-md-8">
+                                    <input class="form-control" type="password" name="new_password">
+                                </div>
+                            </div>
+                            <div class="form-group prof_form">
+                                <label for="confirm_password" class="col-md-3 control-label">Confirm Password:</label>
+                                <div class="controls col-md-8">
+                                    <input class="form-control profile_input" type="password" name="confirm_password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group prof_form">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input type="button" class="btn btn-primary pro_save" value="Save Changes" style="width:45%">
+                                <span></span>
+                                <input type="reset" class="btn btn-default pro_cancel" style="width:45%;margin-left:25px;" value="Cancel" onclick="document.getElementById('idUserProfile').style.display='none'">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+    </div>
+</div>

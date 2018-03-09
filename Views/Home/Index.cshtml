@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div class="col-md-12 cust_padding" id="right_col">
+
+
+        <div class="right_section">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#">Application Development Software<span class="badge cat_badge">08</span></a></li>
+                        <li class="list-group-item"><a href="#"> Alumni Management Software <span class="badge cat_badge">05</span></a></li>
+                        <li class="list-group-item"><a href="#">Accounting Software <span class="badge cat_badge">03</span></a></li>
+                        <li class="list-group-item"><a href="#">Barcoding Software <span class="badge cat_badge">10</span></a></li>
+                        <li class="list-group-item"><a href="#">Big Data Software <span class="badge cat_badge">04</span></a></li>
+                        <li class="list-group-item"><a href="#">Business Management Software <span class="badge cat_badge">10</span></a></li>
+                        <li class="list-group-item"><a href="#">Call Recording Software <span class="badge cat_badge">06</span></a></li>
+                        <li class="list-group-item"><a href="#">Car Rental Software <span class="badge cat_badge">09</span></a></li>
+                        <li class="list-group-item"><a href="#">Catering Software <span class="badge cat_badge">15</span></a></li>
+                        <li class="list-group-item"><a href="#">Cyber Security Software <span class="badge cat_badge">18</span></a></li>
+                        <li class="list-group-item"><a href="#">Data Entry Software <span class="badge cat_badge">10</span></a></li>
+                        <li class="list-group-item"><a href="#">Data Management Software <span class="badge cat_badge">05</span></a></li>
+                        <li class="list-group-item"><a href="#">Daigram Software <span class="badge cat_badge">07</span></a></li>
+                        <li class="list-group-item"><a href="#">eCommerce Software <span class="badge cat_badge">16</span></a></li>
+                        <li class="list-group-item"><a href="#">Email Mangement Software <span class="badge cat_badge">13</span></a></li>
+                        <li class="list-group-item"><a href="#">Energy Mangement Software <span class="badge cat_badge">08</span></a></li>
+                        <li class="list-group-item"><a href="#">Testing Software <span class="badge cat_badge">11</span></a></li>
+                    </ul>
+                </div>                                                                                                           
+                <div role="tabpanel" class="tab-pane fade" id="Section3">
+                    <div class="roll-body">
+                        <div id="Roll_grid">
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="Section4">
+                    <div class="shortlistedgrid_body">
+                        <div id="Shortlisted_grid">
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="Section5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Reports</h6>
+                            <div class="reports">Reports to be attached</div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Short Listed</h6>
+                            <div class="reports">Short listed products</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Import</h6>
+                            @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                    <div class="imports">
+                                        <h5>Import Products</h5>
+                                        <input type="file" id="upld" name="upload" class="filestyle" />
+                                        <br />
+                                        @*<button class="show_hide browse btn btn-primary input-sm" type="submit">
+
+                                                <span  value="upload" id="btn" class="import">Import</span>
+                                            </button>*@
+                                        <button type="submit" id="btnupload" class="show_hide browse btn btn-primary input-sm">Import</button>
+                                    </div>
+
+                            }
+
+                            @using (Html.BeginForm("Preview", "Home", FormMethod.Post))
+                            {
+                                    <div class="impoted_data" id="imp_data">
+                                        <br />
+                                        @*<input type="submit" value="preview" id="preview" /><br/>*@
+                                        @*<button class="preview browse btn btn-primary input-sm" type="submit">
+                                                <span>Preview</span>
+                                            </button>*@
+                                        <button type="submit" class="show_hide browse btn btn-primary input-sm">Save and Preview</button>
+
+                                        <div class="slidingDiv">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+
+                                                    <tr>
+                                                        <th>DB Column</th>
+                                                        <th>Excel Column</th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    @for (int i = 0; i < ViewBag.acount; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DropDownList("DBDropdown" + i, ((List<string>)ViewBag.a).Select(m => new SelectListItem { Text = m, Value = m }), "Select DB Column", new { @id = "db_row" + i, @class = "DB_Col", @name = "db_column_name" })
+                                                                @*@Html.DropDownList(ViewBag.a as IEnumerable<SelectListItem>, "Select")*@
+                                                            </td>
+                                                            <td>
+                                                                @Html.DropDownList("ExcelDropDown" + i, new SelectList(ViewBag.b as System.Collections.IEnumerable), " ", new { @id = "excel_row" + i, @class = "Excel_Col", @name = "Excel_column_name" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My product-->
+                @*edit product*@
+
+
+
+                <!-- add your product -->
+                <!-- Analytics -->
+                <div role="tabpanel" class="tab-pane fade" id="Section8">
+                    <div id="analytics_chart" style="width:100%; height:500px;"></div>
+                </div>
+
+            </div>
+            @*</div>*@
+        </div>
+    </div>
+</div>
+@*</div>*@
+
+
+
+

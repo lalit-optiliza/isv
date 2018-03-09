@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model User
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<form method="post" asp-controller="Home" asp-action="Login">
+    <div id="id01" class="modal">
+        @*<div id="id01">*@
+        <div class="modal-content animate">
+            <div class="container login">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+
+                <div class="form-group mob_form" style="padding-bottom: 20px;">
+                    <label class="col-md-3 control-label">Username:</label>
+                    <div class="col-md-9">
+                        <input class="form-control logIn_input" type="text" placeholder="Enter Username" name="uname" required autofocus>
+                    </div>
+                </div><br />
+
+                <div class="form-group mob_form" style="padding-bottom: 20px;">
+                    <label class="col-md-3 control-label">Password:</label>
+                    <div class="col-md-9">
+                        <input class="form-control logIn_input" type="password" placeholder="Enter Password" name="psw" required>
+                    </div>
+                </div><br />
+                <input type="checkbox" checked="checked" style="margin-left: 15px;"> Remember me  <br />
+                @*<div class="alert alert-danger">
+                        <strong>Error! </strong>
+                    </div>*@
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+                {
+                <div class="alert alert-danger">
+                    <strong>Error! </strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+                </div>
+                }
+                <button type="submit" class="logIn">Log In</button>
+                <span class="psw">Forgot <a href="#">password ?</a></span>
+
+            </div>
+        </div>
+    </div>
+</form>

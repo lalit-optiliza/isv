@@ -1,0 +1,301 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#sidebar").hide();
+
+            $('#my_product').css('display', 'block');
+            $('.tab-pane ').removeClass('active');
+            $('.nav-tabs li').removeClass('active');
+
+            //hide left sidebar and serch menu
+            $('.nav-tabs li').css('display', 'none');
+            $("#my_product").show();
+            $("#my_product").addClass('active');
+            $('.nav-tabs').css('margin-left', '-25px');
+            $('#strip').addClass('col-md-1');
+            $('#sidebar').removeClass('col-md-9');
+            $('.body-content').removeClass('col-md-9');
+            $('.body-content').addClass('col-md-11');
+            //$('.body-content').css('margin-left', '32px');
+            $('.body-content').addClass('setMargin');
+
+            //show block on click of top bar menu option
+            console.log('this', this);
+            if ($(this).hasClass('search_active')) {
+                alert("seach");
+                //show left sidebar
+                $('#sidebar').addClass('col-md-2');
+                $('#sidebar').css('display', 'block');
+                //show search tab
+                $('.nav-tabs li').css('display', 'block');
+
+                //show body container
+                $('.body-content').removeClass('col-md-11');
+                $('.body-content').addClass('col-md-9');
+                $('.body-content').removeClass('setMargin');
+                $('.category').addClass('active');
+                $('#Section1').addClass('active');
+                //hide active tab
+                $('#dash_details').css('display', 'none');
+                $('#dash_details').removeClass('active');
+                $('#addyour_product').css('display', 'none');
+                $('#addyour_product').removeClass('active');
+                $('#analytics_detail').css('display', 'none');
+                $('#analytics_detail').removeClass('active');
+
+            }
+            if ($(this).hasClass('add_active')) {
+                alert("addactive");
+                $('.has_detail').addClass("lalit1");
+                $('.tab-pane').hide();
+                $('.Edit_Product').hide();
+                $('#my_product').css('display', 'block');
+
+                //$('#Section6').css('display', 'none');
+                $('#my_product').addClass('active');
+                $('#Section7').addClass('active');
+                alert("addactive2");
+            }
+            if ($(this).hasClass('import_active')) {
+                $('.tab-pane').hide();
+                $('#dash_details').css('display', 'block');
+                $('#dash_details').addClass('active');
+                $('#Section5').addClass('active');
+            }
+            if ($(this).hasClass('analytics_active')) {
+                $('.tab-pane').hide();
+                $('#analytics_detail').css('display', 'block');
+                $('#analytics_detail').addClass('active');
+                $('#Section6').css('display', 'none');
+                //$('#analytics').addClass('active');
+                $('#Section8').addClass('active');
+            }
+            if ($(this).hasClass('dash_active')) {
+                $('.tab-pane').hide();
+                $('#dash_details').css('display', 'block');
+                $('#dash_details').addClass('active');
+                $('#Section5').addClass('active');
+            }
+        });
+
+    </script>                                                    
+}
+
+
+
+<div class="row">
+    <div role="tabpanel" class="tab-pane fade active in" id="Section6">
+        <div class="panel-group" id="accordion">
+            <div class="panel custom_panel">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Testing Software
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse ">
+                    <div class="panel-body cust_panel_body">
+                        <ul class="custom_panel">
+                            @{ int counter = 1;
+                                foreach (var myproduct in ViewBag.myproduct)
+                                //foreach (var myproduct in Model.myproduct)
+                                {
+                            <li class="panel-body custom_panel_body">
+                            <div id="edit_pr@(counter++)" class="col-md-12 product_row edit_row">
+                                <div class="col-md-2 product_img">
+                                    <a class="thumbnail  listing-thumbnail" data-external-click="logo">
+                                        <img class='tarEdit' src="~/images/UseItBetter.png" />
+                                    </a>
+                                </div>
+                                <div class="col-md-10 cell info">
+
+                                    <div class="cell">
+                                        <h2 id="tar_edit" class="listing-name">
+                                            @*<a>UseItBetter</a>*@
+                                            <a>@Html.Raw(myproduct.product_name)</a>
+                                        </h2>
+                                        @*<h3 class="zeta  listing-vendor  color-gray by_edit">by UseItBetter</h3>*@
+                                        @*<h3 class="zeta  listing-vendor  color-gray by_edit">by @Html.Raw(myproduct.product_name)</h3>*@
+                                        <h3 class="zeta  listing-vendor  color-gray by_edit">by @Model.usernm[0].company_name</h3>
+                                        <div class="review-information">
+                                            <div class="reviews" data-rating="4.0/5 - 3">
+                                                <a href="" class="reviews-stars">
+                                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                                </a>
+                                                <a href="" class="reviews-count milli">(5 reviews)</a>
+                                            </div>
+                                        </div>
+                                        <button class="edit_pr" onclick="EditWindow(this);" style="font-size:16px">Edit <i class="fa fa-edit"></i></button>
+                                    </div>
+                                    <div class="cell">
+                                        <p class="listing-description" id='tar_info'>
+                                            @*UseItBetter understands how your website is built and automatically tracks everything visitors do. You can use CSS selectors, just like you would do in jQuery, to measure visitors actions or use them as Triggers to A/B test changes to your website.*@
+                                            @Html.Raw(myproduct.description)
+                                            <a class="spotlight-link">Learn more about UseItBetter</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                            }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*edit product*@
+    <div class="Edit_Product">
+        @{ int counter1 = 1;
+            foreach (var myproduct in ViewBag.myproduct)
+            {
+                //using (Html.BeginForm("MyProduct", "Home", FormMethod.Post))
+                //{
+        <form method="post" action="MyProduct">
+            <div id="pr_details@(counter1++)" style="display:none;">
+                <div class="row head_section">
+                    <div class="col-xs-2 product_img">
+                        <a class="thumbnail  listing-thumbnail" data-external-click="logo">
+                            <img class="tar_upload" alt="UseItBetter" src="~/images/UseItBetter.png" />
+                        </a>
+                        <input type="file" class="uploadImg" onchange="readURL(this);">
+                    </div>
+                    <div class="col-xs-10 left_cell">
+
+                        <div class="cell">
+                            @*<h2 id="tar_header" contenteditable="false" class="listing-name" name="">*@
+                                @*<a>UseItBetter</a>*@
+                            <input name="id" style="display:none" value="@Html.Raw(myproduct.id)"/>
+                            <input name="user_id" style="display:none" value="@Html.Raw(myproduct.user_id)" />
+                            <h2><a><input id="tar_header" name="product_name" style="border:none" contenteditable="false" value="@Html.Raw(myproduct.product_name)" /></a><span><i class="fa fa-edit edit_content edit_about" onclick="editable_header(this);"></i></span></h2>
+                                @*<fieldset name="product_name">@Html.Raw(myproduct.product_name)<%= Html.Encode(cr.product_name) %></fieldset>*@
+                            @*</h2>*@
+                            <button type="button" class="close_edit" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @*<h3 class="zeta  listing-vendor color-gray tar_by">by UseItBetter</h3>*@
+                            <fieldset name="company_name"><h3 class="zeta  listing-vendor  color-gray by_edit">by @Model.usernm[0].company_name</h3></fieldset>
+                            <div class="review-information">
+                                <div class="reviews" data-rating="4.0/5 - 3">
+                                    <a class="reviews-stars">
+                                        <span class="fa fa-star-o" data-rating="5"></span>
+                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                    </a>
+                                    <a href="" class="reviews-count milli">(5 reviews)</a>
+                                </div>
+                            </div>
+                            <i class="fa fa-edit edit_content edit_header" onclick="editable_header(this);"></i>
+                        </div>
+
+
+                    </div>
+                </div>
+                <hr />
+                <div class="row middle_section">
+                    <div class="col-md-6 pr_details">
+                        <h2>
+                            Product Details
+                        </h2>
+                        <ul class="check-list">
+                            <li>
+                                <div class="grid  grid-thick">
+                                    <div class="cell pr_title">
+                                        <strong>Starting Price</strong><i class="fa fa-edit edit_content edit_detail" onclick="editable_details(this);"></i>
+                                    </div>
+                                    <div class="cell pr_info">
+                                        $9.00/month
+                                        <br>
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="grid  grid-thick">
+                                    <div class="cell pr_title">
+                                        <strong>Free Version</strong><i class="fa fa-edit edit_content edit_detail" onclick="editable_details(this);"></i>
+                                    </div>
+                                    <div class="cell pr_info">
+                                        Yes
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="grid  grid-thick">
+                                    <div class="cell pr_title">
+                                        <strong>Free Trial</strong><i class="fa fa-edit edit_content edit_detail" onclick="editable_details(this);"></i>
+                                    </div>
+                                    <div class="cell pr_info">
+                                        Yes
+
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                        <h2>Vendor Details <i class="fa fa-edit edit_content edit_vendor" onclick="editable_vendor(this);"></i></h2>
+
+                        <ul class="check-list edit_ul">
+                            <li class="edit_li">UseItBetter</li>
+                            <li class="edit_li">www.useitbetter.com/</li>
+                            <li class="edit_li">Founded 2009</li>
+                            <li class="edit_li">Poland</li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-6 pr_desc">
+                        <h2><span class="glyphicon glyphicon-info-sign"></span>About UseItBetter<span><i class="fa fa-edit edit_content edit_about" onclick="editableAbout(this);"></i></span></h2>
+                        <p >
+                            @*UseItBetter understands how your website is built and automatically tracks everything visitors do. You can use CSS selectors, just like you would do in jQuery, to measure visitors actions or use them as Triggers to A/B test changes to your website.
+
+                                Also:
+                                - discover why users are failing to convert (Heat Maps, Form Analytics and Session Replays)
+                                - measure impact of users behaviour on your KPIs (Behavioral Analytics, Segmentation)*@
+                            @*<fieldset name="description" class="tar_about" contenteditable="false">@Html.Raw(myproduct.description)</fieldset>*@
+                            <input name="description" class="tar_about" style="border:none" contenteditable="false" value="@Html.Raw(myproduct.description)" />
+                            <input name="module" class="" style="display:none" value="@Html.Raw(myproduct.modules)" />
+                        </p>
+                    </div>
+                </div>
+                <hr style="margin-bottom: 0px;" />
+                <div class="row bottom_section">
+                    @*<h2><span class="glyphicon glyphicon-comment"></span>UseItBetter Reviews</h2>*@
+                    @*<button type="button" class="review_product">Review This Product !</button>*@
+                    <button type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+                //}
+            }
+        }
+    </div>
+</div>

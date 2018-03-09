@@ -1,0 +1,289 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ISV</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Style.css" />
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <!--Editable dropdown -->
+        <link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body> 
+    <div class="container">
+        <div id="top_strip">
+            <nav class="navbar" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top_nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse navbar-right " id="top_nav">
+
+                    <ul class="nav navbar-nav header-nav stroke">
+                        @*@if (TempData["name"] != null)*@
+                        @if ( @Context.Session.GetString("username") != null)
+                        {
+                            @if (Model.rolelist[0].roles == "Super Admin")
+                            {
+                                <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                                <li class="import_active has_detail" role="presentation"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab">Import</a></li>
+                                <li class="add_active has_detail"><a asp-controller="Home" asp-action="AddProduct">Add Product</a></li>
+                                <li class="analytics_active has_detail"><a id="analytics" href="#Section8" aria-controls="add" role="tab" data-toggle="tab">Analytics</a></li>
+                                @*<li class="has_detail"><a>Add(Admin)</a></li>*@
+                                <li class="dash_active has_detail" role="presentation"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab" id="id_dashboard">Dashboard</a></li>
+                                <li><a onclick="location.href='@Url.Action("Setting","Home")'" style="width:auto;cursor:pointer">Settings</a></li>
+                                <li class="name_active" style="margin-top: -3px;">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @*<span><a onclick="location.href='@Url.Action("UserProfile","Home")'" style="width:auto;cursor:pointer">@ViewData["name"]</a></span>*@
+                                    <span><a asp-controller="Home" asp-action="UserProfile" style="width:auto;cursor:pointer">@Context.Session.GetString("username")</a></span>
+                                </li>                                    
+                                <li class="out_active"><a asp-area="" asp-controller="Home" asp-action="LogOff">Sign Out</a></li>
+                            }
+                            @if (Model.rolelist[0].roles == "Admin")
+                            {
+                                <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                                <li class="add_active has_detail"><a onclick="location.href='@Url.Action("AddProduct","Home")'">Add Product</a></li>
+                                <li class="analytics_active has_detail"><a id="analytics" href="#Section8" aria-controls="add" role="tab" data-toggle="tab">Analytics</a></li>
+                                <li class="dash_active has_detail" role="presentation"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab" id="id_dashboard">Dashboard</a></li>
+                                <li class="name_active" style="margin-top: -3px;">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span><a onclick="location.href='@Url.Action("UserProfile","Home")'" style="width:auto;cursor:pointer">@Context.Session.GetString("username")</a></span>
+                                </li>                                    
+                                <li class="out_active"><a asp-area="" asp-controller="Home" asp-action="LogOff">Sign Out</a></li>
+                            }
+                            @if (Model.rolelist[0].roles == "Isv(subscriber)")
+                            {
+                                <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                                @*<li class="dash_active has_detail" role="presentation"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab" id="id_dashboard">Dashboard</a></li>*@
+                                <li class="add_active has_detail"><a onclick="location.href='@Url.Action("AddProduct","Home")'">Add Product</a></li>
+                                <li class="name_active" style="margin-top: -3px;">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span><a onclick="location.href='@Url.Action("UserProfile","Home")'" style="width:auto;cursor:pointer">@Context.Session.GetString("username")</a></span>
+                                </li>                              
+                                <li class="out_active"><a asp-area="" asp-controller="Home" asp-action="LogOff">Log Out</a></li>
+                            }
+                            @if (Model.rolelist[0].roles == "Isv(free subscriber)")
+                            {
+                                <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                                @*<li class="dash_active has_detail" role="presentation"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab" id="id_dashboard">Dashboard</a></li>*@
+                                <li class="add_active has_detail"><a onclick="location.href='@Url.Action("AddProduct","Home")'">Add Product</a></li>
+                                <li class="name_active" style="margin-top: -3px;">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span><a onclick="location.href='@Url.Action("UserProfile","Home")'" style="width:auto;cursor:pointer">@Context.Session.GetString("username")</a></span>
+                                </li>
+                                <li class="out_active"><a asp-area="" asp-controller="Home" asp-action="LogOff">Log Out</a></li>
+                            }
+                            @if (Model.rolelist[0].roles == "End User")
+                            {
+                                <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                                <li class="add_active has_detail"><a onclick="location.href='@Url.Action("AddProduct","Home")'">Add Product</a></li>
+                                <li class="name_active" style="margin-top: -3px;">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span><a onclick="location.href='@Url.Action("UserProfile","Home")'" style="width:auto;cursor:pointer">@Context.Session.GetString("username")</a></span>
+                                </li>
+                                <li class="out_active"><a asp-area="" asp-controller="Home" asp-action="LogOff">Log Out</a></li>
+                            }
+                        }
+                        else
+                        {
+                        @*<li class="search_active search_link has_detail"><a href="" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>*@
+                        <li class="search_active search_link has_detail"><a asp-controller="Home" asp-action="Index">Search</a></li>
+                        <li class="add_active has_detail"><a onclick="location.href='@Url.Action("AddProduct","Home")'">Add Product</a></li>                        
+                        <li class="logIn_active"><a asp-controller="Home" asp-action="Login" style="width:auto;cursor:pointer">Log In</a></li>                                                
+                        <li class="signUp_active"><a asp-controller="Home" asp-action="SignUp" style="width:auto;cursor:pointer">Sign up</a></li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        @*left strip*@
+        <div id="strip" class="col-md-1">
+            <i id="stripicon" class="fa fa-home" aria-hidden="true"></i>
+            <i id="stripicon" class="fa fa-th-list" aria-hidden="true"></i>
+            <i id="stripicon" class="fa fa-apple" aria-hidden="true"></i>
+            <i id="stripicon" class="fa fa-android" aria-hidden="true"></i>
+            <i id="stripicon" class="fa fa-windows" aria-hidden="true"></i>
+        </div>
+        @*sidebar*@
+        <div class="col-md-2" id="sidebar">
+            @*<div id="top_strip"></div>*@
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand prod_name">isvdirectory.com</a>
+            <i class="fa fa-windows" aria-hidden="true"></i>
+            <i class="fa fa-android" aria-hidden="true"></i>
+            <i class="fa fa-apple" aria-hidden="true"></i>
+            <nav id="side">
+                <!-- Sidebar Header -->
+                <div class="row first_sec">
+                    <div class="col-lg-12">
+                        @*<input id="submit" type="submit" class="btn btn-info" value="Save Search">
+                        <button id="clear" name="cancel" class="btn btn-default">Clear Form</button>*@
+                    </div>
+                </div>
+                <div class="row second_sec">
+                    <div class="col-md-12 form_fields">
+                        <div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>Search</p>
+                            <input type="text" name="search" id="search" class="form-style" autocomplete="off" style="width:100%;" />
+                        </div>
+                        <div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>Category@*<span class="glyphicon glyphicon-triangle-bottom custom_glyphicon"></span>*@</p>
+                            <input type="text" name="Category" id="Category" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />
+                        <div class="form-item">
+                            <p class="formLabel">
+                                <span class="glyphicon glyphicon-search"></span>Keywords@*<span class="glyphicon glyphicon-triangle-bottom custom_glyphicon_keywords">*@</span>
+                            </p>
+                            <input type="text" name="Keywords" id="Keywords" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />
+                        <div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>Modules@*<span class="glyphicon glyphicon-triangle-bottom custom_glyphicon_module"></span>*@</p>
+                            <input type="text" name="Modules" id="Modules" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />
+                        <div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>Features</p>
+                            <input type="text" name="Features" id="Features" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />
+                        @*<div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>City/State/Zip/Country</p>
+                            <input type="text" name="address" id="address" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />*@
+                        <div class="form-item">
+                            <p class="formLabel"><span class="glyphicon glyphicon-search"></span>Price</p>
+                            <input type="text" name="Price" id="Price" class="form-style frm" autocomplete="off" style="" />
+                        </div>
+                        <hr class="custom_hr" />
+                    </div>
+                </div>
+
+
+
+                @*<a id="menu_toggle" data-toggle="tooltip" data-placement="top" title="">
+                    <i class="fa fa-angle-double-left"></i>
+
+                </a>*@
+
+                <!-- Sidebar -->
+
+            </nav>
+        </div>
+        @*body content*@
+        <div class="col-md-9 body-content cust_padding" style="margin-top: 30px;">
+            <div class="mobile_search col-xs-12">
+                <div class="search_mob">
+                    <span class="fa fa-search"></span>
+                    <input type="text" placeholder="Search">
+                </div>
+                <div class="search_mob">
+                    <span class="fa fa-search"></span>
+                    <input type="text" placeholder="Category">
+                </div>
+                <div class="search_mob">
+                    <span class="fa fa-search"></span>
+                    <input type="text" placeholder="Keywords">
+                </div>
+            </div>
+            <div class="tab" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+
+                    @*<li role="presentation" class="category active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
+                    <li id='Category_tab' class='category' role="presentation"><a onclick="location.href='@Url.Action("Index","Home")'" data-target="#Section1" aria-controls="products" role="tab" data-toggle="tab">Category</a></li>*@
+                    <li id='category' class='category' role="presentation"><a onclick="location.href='@Url.Action("Index","Home")'" data-target="#Section1" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
+
+                    @*<li class='product' role="presentation"><a href="#Section2" aria-controls="products" role="tab" data-toggle="tab">Products</a></li>*@
+                    <li id='product_tab' class='product' role="presentation"><a data-target="#Section2" aria-controls="products" role="tab" data-toggle="tab" asp-controller="Home" asp-action="Products">Products</a></li>
+
+                    <li class='modules' role="presentation"><a href="#Section3" aria-controls="module" role="tab" data-toggle="tab">Modules</a></li>
+                    <li class='shortlist' role="presentation"><a href="#Section4" aria-controls="shortlist" role="tab" data-toggle="tab">Shorlisted<span class="badge mybadge greenbadge slide_out_badges">3</span></a></li>
+                    @*<li id='my_product' class='edit_myproduct' role="presentation"><a href="#Section6" aria-controls="add" role="tab" data-toggle="tab">My Products</a></li>*@
+                   @*@if (@Context.Session.GetString("username") != null)
+                   { var count = Model.myproduct.Count();
+                       @if (count != 0)
+                    {
+                    <li id='my_product' class='edit_myproduct' role="presentation"><a asp-controller="Home" asp-action="MyProduct">My Products</a></li>
+                    }
+                    }*@
+                    @if (@Context.Session.GetString("mypro") == "True")
+                    {
+                    <li id='my_product' class='edit_myproduct' role="presentation"><a asp-controller="Home" asp-action="MyProduct">My Products</a></li>
+                    }
+                    <li id='my_product' class='edit_myproduct' role="presentation" style="display:none"><a data-target="#Section6" aria-controls="myproduct" role="tab" data-toggle="tab">My Products</a></li>
+                    <li id='addyour_product' role="presentation" style="display:none"><a data-target="#Section7" aria-controls="addproduct" role="tab" data-toggle="tab">Add your Product</a></li>
+                    <li id='analytics_detail' role="presentation" style="display:none"><a href="#Section8" aria-controls="analytic" role="tab" data-toggle="tab">Analytics</a></li>
+                    <li id='dash_details' role="presentation" style="display:none"><a href="#Section5" aria-controls="Dashboard" role="tab" data-toggle="tab">Dashboard</a></li>
+
+
+
+                </ul>
+
+                @RenderBody()
+            </div>
+        </div>
+        
+        <hr />
+        <footer>
+            <p>&copy; 2017 - ISV</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/custom.js" asp-append-version="true"></script>
+        <!-- Jquery UI -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+        <!-- Input Mask -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
+        <!--Font Awesome-->
+        <script src="https://use.fontawesome.com/e4dd2834c5.js"></script>
+        <!--Editable dropdown -->
+        <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
+        <!-- highcharts-->
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <!--markjs for search highlighted-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

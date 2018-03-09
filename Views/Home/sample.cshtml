@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { }))
+{
+    
+}
+
+
+<h1>Register</h1>
+
+@*<form method="post" asp-controller="Account" asp-action="Register">
+    <div id="id02" class="modal">
+        <div class="modal-content animate">
+            <div class="container login">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="form-group mob_form" style="padding-bottom: 20px;">
+                    <label asp-for="Email" class="col-md-3 control-label">Email:</label>
+                    <div class="col-md-9">
+                        <input asp-for="Email" class="form-control logIn_input" type="email" placeholder="Enter Email" name="email" required autofocus>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                </div><br />
+                <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
+
+                
+                <div>
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <div>
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" />
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div>
+                    <input type="submit" value="Register" />
+                </div>
+            </div>
+         </div>
+    </div>
+
+</form>*@
+
+
+
+<div id="id02" class="modal">
+
+    <div class="modal-content animate">
+        <div class="container login">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="form-group mob_form" style="padding-bottom: 20px;">
+                <label class="col-md-3 control-label">Email:</label>
+                <div class="col-md-9">
+                    <input class="form-control logIn_input" type="email" placeholder="Enter Email" name="email" required autofocus>
+                </div>
+            </div><br />
+            @*<label><b>Email</b></label>
+                <input class="input_field" type="email" placeholder="Enter Email" name="email" required>*@
+
+
+            <div class="form-group mob_form" style="padding-bottom: 20px;">
+                <label class="col-md-3 control-label">Password:</label>
+                <div class="col-md-9">
+                    <input class="form-control logIn_input" type="password" placeholder="Enter Password" name="psw" required>
+                </div>
+            </div><br />
+
+            @*<label><b>Password</b></label>
+                <input class="input_field" type="password" placeholder="Enter Password" name="psw" required>*@
+            <div class="form-group mob_form" style="padding-bottom: 20px;">
+                <label class="col-md-3 control-label">Repeat Password:</label>
+                <div class="col-md-9">
+                    <input class="form-control logIn_input" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                </div>
+            </div><br />
+            @*<label><b>Repeat Password</b></label>
+                <input class="input_field" type="password" placeholder="Repeat Password" name="psw-repeat" required>*@
+            <div class="col-md-12" style="font-size: 12px;text-align: center;">
+                <span>
+                    <input type="checkbox" checked="checked">
+                </span>
+                <span>
+                    By creating an account you agree to our <a href="#">Terms & Privacy.</a>
+                </span>
+            </div>
+            <br />
+
+
+            <div class="clearfix">
+                <button type="submit" class="signupbtn">Sign Up</button>
+                @*<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancel">Cancel</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
